@@ -1,0 +1,48 @@
+##################################################################################################
+#
+# This file lists all the base tests that should be executed in order to test the chat application.
+#
+##################################################################################################
+
+1. Setup: start mySlackbot application with --debug and --port 6770
+   Verify: Screen shows  this message:
+           "Starting server at port  6770 with debug  True"
+
+2. Setup: same as (1)
+   Trigger: start myChatClient.py application with --name "foo" --port 6770 on the same computer as (1)
+   Verify: Screen shows  this message:
+           "Connected to chat server@6770"
+           {'to': 'foo', 'text': 'Hello foo', 'from': 'Server'}
+
+3. Setup: same (1) and (2)
+   Trigger: start myChatClient.py application with --name "bar" --port 6770 on the same computer as (1)
+   Verify: (a) Screen on this client shows this message:
+               "Connected to chat server@6770"
+               {'to': 'bar', 'text': 'Hello bar', 'from': 'Server'}
+           (b) Screen on client 'foo' shows the following message:
+               {'to': 'foo', 'text': 'User bar joined', 'from': 'Server'}
+
+4. Setup: same (1), (2) and (3)
+   Trigger: start myChatClient.py application with --name "yippee" --port 6770 on the same computer as (1)
+   Verify: (a) Screen on this client shows this message:
+               "Connected to chat server@6770"
+               {'to': 'yippee', 'text': 'Hello bar', 'from': 'Server'}
+           (b) Screen on client 'foo' shows the following message:
+               {'to': 'foo', 'text': 'User yippee joined', 'from': 'Server'}
+           (c) Screen on client 'bar' shows the following message:
+               {'to': 'bar', 'text': 'User yippee joined', 'from': 'Server'}
+
+5. Setup: same (1), (2), (3) and (4)
+   Trigger: Type "Hello all!" on client named foo and press ENTER
+   Verify: (b) Screen on this client shows the following message:
+               "Interrupted"
+           (c) Screen on client 'bar' shows the following message:
+               {'to': 'bar', 'text': 'User foo disconnected', 'from': 'Server'}
+
+6. Setup: same (1), (2) and (3)
+   Trigger: Press Ctrl + C on client named foo
+   Verify: (a) Screen on this client shows this message:
+               "Connected to chat server@6770"
+               {'to': 'bar', 'text': 'Hello bar', 'from': 'Server'}
+           (b) Screen on client 'foo' shows the following message:
+               {'to': 'foo', 'text': 'User bar joined', 'from': 'Server'}
