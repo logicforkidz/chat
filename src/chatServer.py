@@ -1,5 +1,6 @@
+#!/usr/bin/python3
 """
-    Copyright 2021 LogicForKidz
+    Copyright 2021LogicForKidz
 
     This file is part of logicForkidz repository on https://www.github.com.
 

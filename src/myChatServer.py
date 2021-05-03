@@ -10,7 +10,7 @@ The chatbotServer mnodule below provides 3 helper functions to build the chatbot
                                     'from': who sent the message
                                     'text': the string message.
 """
-import chatbotServer
+import chatServer
 
 
 def handle_new_user_connected (user):
