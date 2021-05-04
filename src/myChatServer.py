@@ -62,7 +62,7 @@ myEventHandlers["disconnected"] = handle_user_disconnected
 myEventHandlers["from_user"] = handle_msg_from_user
 
 # Intialize the chatbot server
-chatbotServer.chatbot_server_init(args, myEventHandlers)
+chatServer.chatbot_server_init(args, myEventHandlers)
 
 # run the main loop of the server
-chatbotServer.chatbot_server_run()
+chatServer.chatbot_server_run()
