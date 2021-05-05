@@ -134,8 +134,8 @@ class BotFactory(protocol.Factory):
         return MyChat(self)
 
 
-"""This  initializes the chatbot client"""
-def chatbot_server_init(args, handlers):
+"""This  initializes the chat server"""
+def chat_server_init(args, handlers):
     global factory, server_port, handle_new_user_connected, handle_user_disconnected, handle_msg_from_user
 
     #debug
@@ -160,12 +160,12 @@ def chatbot_server_init(args, handlers):
     factory.clients = []
 
 """This runs the protocol on port in server_port"""
-def chatbot_server_run():
+def chat_server_run():
     global server_port 
     endpoint = TCP4ServerEndpoint(reactor, server_port)
-    chatbot_listen_deferred = endpoint.listen(factory)
+    chat_listen_deferred = endpoint.listen(factory)
     
-    @chatbot_listen_deferred.addErrback
+    @chat_listen_deferred.addErrback
     def server_listen_failed(failure):
         print ("@@@@@ Callback",  failure.value)
         import os
@@ -175,7 +175,7 @@ def chatbot_server_run():
     reactor.run()
 
 """This sends the given message to the specifed user - Will return True if successful, False otherwise"""
-def chatbot_server_send_msg(msg):
+def chat_server_send_msg(msg):
     if not 'to' in msg.keys(): return False
     else: user = msg['to']
     if not user in factory.clientmap.keys(): return False

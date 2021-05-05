@@ -1,8 +1,8 @@
 """
-The chatbotServer mnodule below provides 3 helper functions to build the chatbot server
-1. chatbot_server_init(): this function initializes the chatbot
-2. chatbot_server_run(): this function starts running the main loop to poll for messages. 
-3. chatbot_server_send_msg(msg): this function sends the given message to the specified user.
+The chatServer mnodule below provides 3 helper functions to build the chat server
+1. chat_server_init(): this function initializes the chat
+2. chat_server_run(): this function starts running the main loop to poll for messages. 
+3. chat_server_send_msg(msg): this function sends the given message to the specified user.
                                 It will return True if successful, False otherwise
 
                                 msg is a dictionary which can have 3 standard keys.
@@ -38,7 +38,7 @@ def handle_msg_from_user(msg):
     user is the string name of the user that sent the message
     msg is a dictionary. See notes above for details.
 
-    By default, the chatbot_server forwards any message it receives to everyone else who is connected to it.
+    By default, the chat_server forwards any message it receives to everyone else who is connected to it.
     If you have handled the message and you don't want server to do anything with it
     then this function should return 0. But return anything other than 0 for the server do its default processing
     """
@@ -55,14 +55,14 @@ parser.add_argument('--port', dest='port', type=int, help='server port number', 
 args = parser.parse_args(sys.argv[1:])
 print ("Starting server at port ", args.port, 'with debug ', args.debug, "\n")
 
-# Intialize the chatbot server
+# Intialize the chat server
 myEventHandlers = {}
 myEventHandlers ["connected"] = handle_new_user_connected
 myEventHandlers["disconnected"] = handle_user_disconnected
 myEventHandlers["from_user"] = handle_msg_from_user
 
-# Intialize the chatbot server
-chatServer.chatbot_server_init(args, myEventHandlers)
+# Intialize the chat server
+chatServer.chat_server_init(args, myEventHandlers)
 
 # run the main loop of the server
-chatServer.chatbot_server_run()
+chatServer.chat_server_run()

@@ -1,6 +1,6 @@
 """
 The chatClient module below provides the following helper functions to build your own chat client
-1. chat_client_init(): this function initializes the chatbot. It accepts a dictionary that maps the following events to
+1. chat_client_init(): this function initializes the chat client. It accepts a dictionary that maps the following events to
                         their function handlers. If you want default behavior to an event then don't set the corresponding
                         key.
 
@@ -63,7 +63,7 @@ def handle_msg_from_terminal(msg):
     sent to server without it and the server will apply the default behavior.
 
     If you have handled this message and don't want chatClient to do anything further then return 0.
-    If you return anything else the chatClient will send msg to the chatbotServer
+    If you return anything else the chatClient will send msg to the chatServer
     """
     print("\n[System] got msg from terminal\n")
     return -1
@@ -80,7 +80,7 @@ parser.add_argument('--port', dest='port', help='server port number', default=80
 args = parser.parse_args(sys.argv[1:])
 print ("Trying to connect to ",args.server, " at port ", args.port, " as ", args.name, "\n")
 
-# Intialize the chatbot server
+# Intialize the chat client
 myEventHandlers = {}
 myEventHandlers ["connected"] = handle_server_connected
 myEventHandlers["disconnected"] = handle_server_disconnected
